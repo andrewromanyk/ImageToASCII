@@ -4,6 +4,7 @@ def ImageToAscii(image_name, scale, destination = 'ImageToAscii.txt'):
     image = Image.open(image_name).convert('RGB')
     width, height = image.size
     width, height = width//scale, height//scale
+    print(width, height)
 
     resized_image = image.resize((width, height))
     resized_image = resized_image.load()
@@ -12,7 +13,8 @@ def ImageToAscii(image_name, scale, destination = 'ImageToAscii.txt'):
 
     for i in range(height):
         for j in range(width):
-            brightness = sum(resized_image[i, j])//3
+            print(i, j)
+            brightness = sum(resized_image[j, i])//3
             if brightness <= 32: char = '⠀⠀'
             elif brightness <= 64: char = '⠀⠐'
             elif brightness <= 96: char = '⠀⠌'
@@ -21,7 +23,7 @@ def ImageToAscii(image_name, scale, destination = 'ImageToAscii.txt'):
             elif brightness <= 192: char = '⠀⠞'
             elif brightness <= 224: char = '⠀⠻'
             elif brightness <= 255: char = '⠀⠿'
-            asciiImage[j][i] = char
+            asciiImage[i][j] = char
 
     result = ''
     for line in asciiImage:
@@ -33,7 +35,7 @@ def ImageToAscii(image_name, scale, destination = 'ImageToAscii.txt'):
     return result
 
 def main():
-    print(ImageToAscii("test.png", 15))
+    print(ImageToAscii("test.jpg", 15))
 
 if __name__ == "__main__":
    main()
