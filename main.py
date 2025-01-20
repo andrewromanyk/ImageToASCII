@@ -1,5 +1,5 @@
 from PIL import Image
-
+#test
 def ImageToAscii(image_name, scale, destination = 'ImageToAscii.txt'):
     image = Image.open(image_name).convert('RGB')
     width, height = image.size
